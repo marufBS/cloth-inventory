@@ -2,13 +2,15 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const appSlice = createSlice({
   name: 'app',
-  initialState: 0,
+  initialState: {
+    mainHeight: 0
+  },
   reducers: {
-    addValue: ((state) => {
-      state = state++
+    setMainHeight: ((state, action) => {
+      state.mainHeight = action.payload
     })
   }
 })
 
-export const { addValue } = appSlice.actions
+export const { setMainHeight } = appSlice.actions
 export default appSlice.reducer;

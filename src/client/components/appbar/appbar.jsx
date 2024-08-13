@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
 import { Link } from 'react-router-dom';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import Products from "../../pages/products/products";
-// import Inventory from "../../pages/inventory/inventory";
-// import Customer from "../../pages/customer/customer";
+
 export default function Appbar() {
+ 
   return (
     <div className="flex">
       <Navbar as="div" isBordered className="w-full justify-around">
@@ -65,7 +63,7 @@ export default function Appbar() {
           </Dropdown>
         </NavbarContent>
       </Navbar>
-      
+
     </div>
 
   );

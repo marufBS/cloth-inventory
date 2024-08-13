@@ -27,6 +27,11 @@ export default function Products() {
       price: "$5.30",
     },
     {
+      title: "Lemon",
+      img: "/images/fruit-4.jpeg",
+      price: "$5.30",
+    },
+    {
       title: "Avocado",
       img: "/images/fruit-5.jpeg",
       price: "$15.70",
@@ -35,6 +40,11 @@ export default function Products() {
       title: "Lemon 2",
       img: "/images/fruit-6.jpeg",
       price: "$8.00",
+    },
+    {
+      title: "Banana",
+      img: "/images/fruit-7.jpeg",
+      price: "$7.50",
     },
     {
       title: "Banana",
