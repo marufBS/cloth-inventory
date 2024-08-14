@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 export default function Appbar() {
- 
+  const user = useSelector((state)=>state.user.userData)
+  console.log(user)
+
   return (
     <div className="flex">
       <Navbar as="div" isBordered className="w-full justify-around">
@@ -29,8 +32,8 @@ export default function Appbar() {
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link to="/inventory">
-              Inventory
+            <Link to="/products">
+              Produtcs
             </Link>
           </NavbarItem>
           <NavbarItem>
@@ -53,7 +56,7 @@ export default function Appbar() {
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
                 <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">zoey@example.com</p>
+                <p className="font-semibold">{user.email}</p>
               </DropdownItem>
               <DropdownItem key="settings">My Settings</DropdownItem>
               <DropdownItem key="logout" color="danger">

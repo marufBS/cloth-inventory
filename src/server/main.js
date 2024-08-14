@@ -2,18 +2,37 @@ import express from "express";
 import ViteExpress from "vite-express";
 import bodyParser from "body-parser";
 import { mongoose } from "./db.js";
-import { CatModel } from "./models.js";
+import { UserModel } from "./models.js";
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }))
 
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get("/hello", (req, res) => {
   res.send("Hello Vite + React + Redux");
 });
 
+app.post("/signup", async (req, res) => {
+  try {
+    const { fullname, address, username, email, password } = req.body;
+    const newUser = new UserModel({ fullname, address, username, email, password })
+    const savedUser = await newUser.save()
+    res.status(200).send({ savedUser })
 
+  } catch (error) {
+    res.status(500).send({ error })
+  }
+})
+
+app.get("/users", async (req, res) => {
+  try {
+    const users = await UserModel.find()
+    res.status(200).send(users)
+  } catch (error) {
+    res.status(500).send(error)
+  }
+})
 
 app.post("/v1/prompt", async (req, res) => {
   const { id, attachments, question, body, imgqty } = req.body.prompt;
@@ -45,16 +64,6 @@ app.post("/v1/prompt", async (req, res) => {
             body: body,
             //replaced links with handcoded links
             attachments: links
-            // [
-            //   "https://picsum.photos/200/300",
-            //   "https://picsum.photos/200/300",
-            //   "https://picsum.photos/200/300",
-            //   "https://picsum.photos/200/300",
-            //   // "https://picsum.photos/200/300",
-            //   // "https://picsum.photos/200/300",
-            //   // "https://picsum.photos/200/300",
-
-            // ]
           }
         }
       }, { new: true })
@@ -97,7 +106,7 @@ app.post("/v1/prompt", async (req, res) => {
   }
 })
 // get all the conversation from db
-app.get("/v1/conversations",async(req,res)=>{
+app.get("/v1/conversations", async (req, res) => {
   try {
     const conversations = await ConversationModel.find()
     res.status(200).send(conversations)

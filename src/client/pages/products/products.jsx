@@ -66,18 +66,12 @@ export default function Products() {
       .then(() => {
         list.map((obj, i) => obj.img = imageData[i]?.url)
         setProducts(list)
-        console.log(list)
       })
 
   }, [])
-  // list.map((obj, i) => obj.img = imageData[i]?.url)
-  // setProducts(list)
-  // for (let index = 0; index < 10; index++) {
-  // }
-  // console.log(products)
 
 
-
+  console.log("producs")
 
   return (
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
