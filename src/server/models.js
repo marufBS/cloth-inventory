@@ -43,9 +43,24 @@ const customerSchema = new mongoose.Schema({
   // }
 })
 
+const productSchema = new mongoose.Schema({
+  productName:{
+    type:String,
+    required:true,
+  },
+  productPrice:{
+    type:Number,
+    required:true
+  },
+  productURL:{
+    type:String,
+    required:true
+  }
+})
 
 
 const CustomerMolel = mongoose.model('customer',customerSchema);
+const ProductModel = mongoose.model('product',productSchema)
 
 // Export Model
-export { CustomerMolel };
+export { CustomerMolel,ProductModel };
