@@ -8,8 +8,7 @@ export default function Appbar() {
   console.log(user)
 
   return (
-    <div className="flex">
-      <Navbar as="div" isBordered className="w-full justify-around">
+      <Navbar  position="fixed" as="div" isBordered className="w-full justify-around">
         <NavbarContent justify="between">
           <NavbarBrand className="mr-4">
             {/* <AcmeLogo /> */}
@@ -28,7 +27,12 @@ export default function Appbar() {
         <NavbarContent as="div" className="items-center gap-5" justify="end">
           <NavbarItem>
             <Link to="/">
-              Products
+              Home
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link to="/inventory">
+              Inventory
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
@@ -66,8 +70,6 @@ export default function Appbar() {
           </Dropdown>
         </NavbarContent>
       </Navbar>
-
-    </div>
 
   );
 }
