@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMainHeight } from "./AppSlice";
 import SignUp from "./pages/signup/signup";
 import SignIn from "./pages/signin/signin";
+import CreateOrder from "./pages/inventory/createOrder";
 function App() {
   const mainRef = useRef(null)
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/inventory" element={<Inventory />} />
+            <Route path="/inventory/createOrder" element={<CreateOrder />} />
             {/* <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} /> */}
           </Routes>

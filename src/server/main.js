@@ -4,12 +4,15 @@ import bodyParser from "body-parser";
 import { mongoose } from "./db.js";
 import productRouter from "./routes/productsRoute.js"
 import customerRouter from "./routes/customersRoute.js";
+import orderRouter from "./routes/ordersRoute.js";
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
 app.use(productRouter)
 app.use(customerRouter)
+app.use(orderRouter)
 
 app.get("/hello", (req, res) => {
   res.send("Hello Vite + React + Redux");

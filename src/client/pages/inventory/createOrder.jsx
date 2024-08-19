@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 // import { setCustomer_Id, setCustomerAddress, setCustomerId, setCustomerName, setListUpdate } from "./customerSlice";
 
 
-const Inventory = () => {
+const CreateOrder = () => {
   const update = useSelector((state) => state.customer.listUpdate)
   const [orders, setOrders] = useState([])
   const [modalType, setModalType] = useState("add")
@@ -55,7 +55,7 @@ const Inventory = () => {
     <div className="max-w-5xl mx-auto mt-5 w-full">
       <div className="flex justify-end my-5">
         
-        <Button onPress={onOpen} aria-label="Create Customer" onClick={handleCustomerCreate}><Link to="/inventory/createOrder">Create Order</Link></Button>
+        <Button onPress={onOpen} aria-label="Create Customer" onClick={handleCustomerCreate}><Link to="/inventory">Back</Link></Button>
       </div>
       <Table selectionMode="single" aria-label="Customer Table">
         <TableHeader>
@@ -135,5 +135,5 @@ const Inventory = () => {
   )
 }
 
-export default Inventory
+export default CreateOrder
 

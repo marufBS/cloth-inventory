@@ -1,0 +1,17 @@
+[
+    {
+        "billId": "40953485",
+        "billDate": "date",
+        "customerId": "34095",
+        "paidAbount": 3434,
+        "products": [
+            {
+                "productId": "433435",
+                "productName": "",
+                "productQuantity": 0,
+                "productPrice": "",
+                "productDiscount": 0
+            }
+        ]
+    }
+]
