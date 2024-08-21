@@ -13,6 +13,10 @@ const productSchema = new mongoose.Schema({
   productURL:{
     type:String,
     required:true
+  },
+  productQuantity:{
+    type:Number,
+    required:true
   }
 })
 

@@ -3,8 +3,8 @@ import ProductModel from "../models/productsModel.js"
 
 export const setProduct = async (req, res) => {
     try {
-        const { productName, productPrice, productURL } = req.body
-        const product = new ProductModel({ productName, productPrice, productURL })
+        const { productName, productPrice, productURL,productQuantity } = req.body
+        const product = new ProductModel({ productName, productPrice, productURL,productQuantity })
         const savedProduct = await product.save()
         res.status(200).send({ message: "product saved successfully", savedProduct })
     } catch (error) {

@@ -59,7 +59,7 @@ export default function Customer() {
         <TableHeader>
           <TableColumn>NAME</TableColumn>
           <TableColumn>ADDRESS</TableColumn>
-          <TableColumn>ACTION</TableColumn>
+          <TableColumn align="center">ACTION</TableColumn>
         </TableHeader>
         <TableBody>
           {

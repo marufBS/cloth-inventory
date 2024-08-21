@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, CardBody, CardFooter, Image, Button, useDisclosure } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdOutlineEdit ,MdDeleteOutline} from "react-icons/md";
-import { setListUpdate, setProduct_Id, setProductName, setProductPrice, setProductURL } from "./productsSlice";
+import { MdOutlineEdit, MdDeleteOutline } from "react-icons/md";
+import { setListUpdate, setProduct_Id, setProductName, setProductPrice, setProductQuantity, setProductURL } from "./productsSlice";
 import ProductModal from "../../components/modals/productModal";
+import { BsBoxes } from "react-icons/bs";
 
 export default function Products() {
   const mainHeight = useSelector((state) => state.app.mainHeight)
-  const update = useSelector((state)=>state.product.listUpdate)
+  const update = useSelector((state) => state.product.listUpdate)
   const [products, setProducts] = useState([])
-  const [modalType,setModalType] = useState("add")
-  
+  const [modalType, setModalType] = useState("add")
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const dispatch = useDispatch()
 
@@ -23,28 +24,30 @@ export default function Products() {
 
   }, [update])
 
-  const handleProductCreate = ()=>{
+  const handleProductCreate = () => {
     setModalType("add")
     dispatch(setProductName(""))
     dispatch(setProductPrice(""))
     dispatch(setProductURL(""))
+    dispatch(setProductQuantity(""))
   }
 
-  const handleEditProduct = (id) =>{
+  const handleEditProduct = (id) => {
     onOpen()
     setModalType("edit")
 
-    const response = products.filter((product)=>product._id===id)
+    const response = products.filter((product) => product._id === id)
     const matchedProduct = response[0]
-    
+
     dispatch(setProductName(matchedProduct.productName))
     dispatch(setProductPrice(matchedProduct.productPrice))
     dispatch(setProductURL(matchedProduct.productURL))
+    dispatch(setProductQuantity(matchedProduct.productQuantity))
     dispatch(setProduct_Id(id))
-    
+
   }
 
-  const handleDeleteProduct = async(id)=>{
+  const handleDeleteProduct = async (id) => {
     const deletedProduct = await axios.delete(`http://localhost:3000/api/products/${id}`)
     console.log(deletedProduct)
     dispatch(setListUpdate())
@@ -69,20 +72,29 @@ export default function Products() {
               />
             </CardBody>
             <CardFooter className="text-small flex flex-col gap-2">
-              <div className="flex flex-row justify-between w-full">
-                <b>{item.productName}</b>
-                <p className="text-default-500">${item.productPrice}</p>
+              <div className="w-full flex justify-start">
+                {item.productName}
+              </div>
+              <div className="flex flex-col w-full">
+                <div className="flex flex-row justify-end">
+                  <div className="flex gap-5">
+                    <p className="text-default-500"><span className="text-xl">৳ </span>{item.productPrice}</p>
+                    <div className="flex items-center gap-1">
+                      <BsBoxes />{item.productQuantity}
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="flex flex-row justify-between w-full">
-                <Button isIconOnly variant="light" color="danger" onClick={()=>handleDeleteProduct(item._id)}><MdDeleteOutline size={20} /></Button>
-                <Button isIconOnly variant="light" color="secondary" onClick={()=>handleEditProduct(item._id)}><MdOutlineEdit size={20} /></Button>
+                <Button isIconOnly variant="light" color="danger" onClick={() => handleDeleteProduct(item._id)}><MdDeleteOutline size={20} /></Button>
+                <Button isIconOnly variant="light" color="secondary" onClick={() => handleEditProduct(item._id)}><MdOutlineEdit size={20} /></Button>
               </div>
             </CardFooter>
           </Card>
         ))}
       </div>
-        
-      <ProductModal isOpen={isOpen} modalType={modalType}  onOpenChange={onOpenChange}/>
+
+      <ProductModal isOpen={isOpen} modalType={modalType} onOpenChange={onOpenChange} />
     </div>
   );
 }

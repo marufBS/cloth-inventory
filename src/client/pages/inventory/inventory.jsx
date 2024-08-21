@@ -4,7 +4,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, Input, TableCell,
 import { MdOutlineEdit, MdDeleteOutline } from "react-icons/md";
 // import CustomerModal from "../../components/modals/customarModal";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { setCustomerId, setCustomer_Id, setCustomerAddress, setCustomerName, setListUpdate } from "../customer/customerSlice";
 // import { setCustomer_Id, setCustomerAddress, setCustomerId, setCustomerName, setListUpdate } from "./customerSlice";
 
@@ -13,9 +13,11 @@ const Inventory = () => {
   const update = useSelector((state) => state.customer.listUpdate)
   const [orders, setOrders] = useState([])
   const [modalType, setModalType] = useState("add")
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/orders")
@@ -51,13 +53,23 @@ const Inventory = () => {
   //   dispatch(setListUpdate())
 
   // }
+  // useEffect(()=>{
+  //   navigate("/house")
+  // },[selectedKeys])
+  console.log(selectedKeys)
   return (
     <div className="max-w-5xl mx-auto mt-5 w-full">
       <div className="flex justify-end my-5">
-        
+
         <Button onPress={onOpen} aria-label="Create Customer" onClick={handleCustomerCreate}><Link to="/inventory/createOrder">Create Order</Link></Button>
       </div>
-      <Table selectionMode="single" aria-label="Customer Table">
+      <Table
+        selectedKeys={selectedKeys}
+        onSelectionChange={setSelectedKeys}
+        selectionMode="single"
+        aria-label="Customer Table"
+      selectionBehavior="replace" 
+      >
         <TableHeader>
           <TableColumn>Order ID</TableColumn>
           <TableColumn>Date</TableColumn>
@@ -74,11 +86,11 @@ const Inventory = () => {
               let totalDiscount = 0
               let dueAmount = 0
               let totalAmount = 0
-              item.products.map((i)=>{
-                totalDiscount+=i.productDiscount
-                totalAmount+=i.productPrice
+              item.products.map((i) => {
+                totalDiscount += i.productDiscount
+                totalAmount += i.productPrice
               })
-              dueAmount =((totalAmount-totalDiscount)-item.paidAmount)
+              dueAmount = ((totalAmount - totalDiscount) - item.paidAmount)
               return (
                 <TableRow key={item._id}>
                   <TableCell>
@@ -94,13 +106,13 @@ const Inventory = () => {
                     <div>{item.customerId}</div>
                   </TableCell>
                   <TableCell>
-                  {totalDiscount}
+                    {totalDiscount}
                   </TableCell>
                   <TableCell>
                     {dueAmount}
                   </TableCell>
                   <TableCell>
-                   <div>{item.paidAmount}</div>
+                    <div>{item.paidAmount}</div>
                   </TableCell>
                   <TableCell>
                     <div className="flex justify-center items-center">

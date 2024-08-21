@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { setListUpdate, setProductName, setProductPrice, setProductURL } from '../../pages/products/productsSlice'
+import { setListUpdate, setProductName, setProductPrice, setProductQuantity, setProductURL } from '../../pages/products/productsSlice'
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Textarea } from '@nextui-org/react'
 
 
@@ -11,6 +11,7 @@ const ProductModal = ({ isOpen, modalType, onOpenChange }) => {
   const productName = useSelector((state) => state.product.productName)
   const productPrice = useSelector((state) => state.product.productPrice)
   const productURL = useSelector((state) => state.product.productURL)
+  const productQuantity = useSelector((state)=>state.product.productQuantity)
   const product_Id = useSelector((state) => state.product.product_Id)
 
 
@@ -18,7 +19,7 @@ const ProductModal = ({ isOpen, modalType, onOpenChange }) => {
     switch (modalType) {
       case "add":
         axios.post("http://localhost:3000/api/products", {
-          productName, productPrice, productURL
+          productName, productPrice, productURL,productQuantity
         }).then((res) => {
           console.log(res)
           dispatch(setListUpdate())
@@ -69,6 +70,18 @@ const ProductModal = ({ isOpen, modalType, onOpenChange }) => {
                       defaultValue={productPrice}
                       value={productPrice}
                       onChange={(e) => dispatch(setProductPrice(e.target.value))}
+                    />
+                    <Input
+                      aria-level="Product Quantity"
+                      isRequired
+                      type="text"
+                      label="Product Quantity"
+                      variant="bordered"
+                      placeholder='Enter product quantity'
+                      className="max-w-xs text-default"
+                      defaultValue={productQuantity}
+                      value={productQuantity}
+                      onChange={(e) => dispatch(setProductQuantity(e.target.value))}
                     />
                     <Textarea
                       aria-label="Product URL"
