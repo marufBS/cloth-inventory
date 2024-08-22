@@ -8,7 +8,8 @@ const productSlice = createSlice({
         productURL:"",
         productQuantity:0,
         product_Id:"",
-        listUpdate:false
+        listUpdate:false,
+        productActionType:""
     },
     reducers:{
         setProductName:((state,action)=>{
@@ -28,9 +29,12 @@ const productSlice = createSlice({
         }),
         setListUpdate:((state)=>{
             state.listUpdate = !state.listUpdate
+        }),
+        setProductActionType:((state,action)=>{
+            state.productActionType = action.payload
         })
     }
 })
 
-export const {setProductName,setProductPrice,setProductURL,setProductQuantity,setProduct_Id,setListUpdate} = productSlice.actions
+export const {setProductName,setProductPrice,setProductURL,setProductQuantity,setProduct_Id,setListUpdate,setProductActionType} = productSlice.actions
 export default productSlice.reducer

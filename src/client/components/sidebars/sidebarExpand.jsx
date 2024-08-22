@@ -4,12 +4,20 @@ import { BsBoxes } from "react-icons/bs";
 import { IoIosPeople } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import { RiFileList3Line } from "react-icons/ri";
+import { useDispatch } from 'react-redux';
+import { setProductActionType } from '../../pages/products/productsSlice';
+import { setCustomerActionType } from '../../pages/customer/customerSlice';
+import { setInventoryActionType } from '../../pages/inventory/inventorySlice';
 const SidebarExpand = () => {
 
-    const navigate = useNavigate()
 
-    const handleRoute = (url) =>{
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const handleRoute = (url) => {
         navigate(url)
+        dispatch(setProductActionType(""))
+        dispatch(setCustomerActionType(""))
+        dispatch(setInventoryActionType(""))
     }
     return (
         <div className="min-w-[300px]  border-r-1 border-default-200">
@@ -25,14 +33,14 @@ const SidebarExpand = () => {
                 <p className="hidden sm:block font-bold text-inherit">ClothCart</p>
             </div> */}
             {/* <Divider /> */}
-            <Listbox selectionMode='single' hideSelectedIcon classNames={{list:"gap-2 h-[180px] text-2xl"}}>
-                <ListboxItem startContent={<BsBoxes />} classNames={{title:"text-xl"}}  key="products" onClick={() => handleRoute("/products")}>
+            <Listbox selectionMode='single' hideSelectedIcon classNames={{ list: "gap-2 h-[180px] text-2xl" }}>
+                <ListboxItem startContent={<BsBoxes />} classNames={{ title: "text-xl" }} key="products" onClick={() => handleRoute("/products")}>
                     Products
                 </ListboxItem>
-                <ListboxItem startContent={<IoIosPeople />} classNames={{title:"text-xl"}} key="customers" onClick={() => handleRoute("/customers")}>
+                <ListboxItem startContent={<IoIosPeople />} classNames={{ title: "text-xl" }} key="customers" onClick={() => handleRoute("/customers")}>
                     Customers
                 </ListboxItem>
-                <ListboxItem startContent={<RiFileList3Line />} classNames={{title:"text-xl"}} key="inventory" onClick={() => handleRoute("/inventory")}>
+                <ListboxItem startContent={<RiFileList3Line />} classNames={{ title: "text-xl" }} key="inventory" onClick={() => handleRoute("/inventory")}>
                     Inventory
                 </ListboxItem>
             </Listbox>

@@ -8,7 +8,8 @@ const customerSlice = createSlice({
         customerAddress:"",
         customerAvatar:"",
         customer_Id:"",
-        listUpdate:false
+        listUpdate:false,
+        customerActionType:""
     },
     reducers:{
         setCustomerName:((state,action)=>{
@@ -25,9 +26,12 @@ const customerSlice = createSlice({
         }),
         setListUpdate:((state)=>{
             state.listUpdate = !state.listUpdate
+        }),
+        setCustomerActionType:((state,action)=>{
+            state.customerActionType = action.payload
         })
     }
 })
 
-export const {setCustomerName,setCustomerId,setCustomerAddress,setCustomer_Id,setListUpdate} = customerSlice.actions
+export const {setCustomerName,setCustomerId,setCustomerAddress,setCustomer_Id,setListUpdate,setCustomerActionType} = customerSlice.actions
 export default customerSlice.reducer

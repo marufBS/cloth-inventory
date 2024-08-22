@@ -3,6 +3,7 @@ import AppReducer from "../AppSlice";
 import UserReducer from "../pages/customer/userSlice";
 import ProductsReducer from "../pages/products/productsSlice";
 import CustomerReducer from "../pages/customer/customerSlice";
+import InventoryReducer from "../pages/inventory/inventorySlice"
 
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
         app: AppReducer,
         user: UserReducer,
         product:ProductsReducer,
-        customer:CustomerReducer
+        customer:CustomerReducer,
+        inventory:InventoryReducer
     }
 })
 
