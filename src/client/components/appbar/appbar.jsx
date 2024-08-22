@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, Button } from "@nextui-org/react";
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { CiDark,CiLight } from "react-icons/ci";
+import { CiDark, CiLight } from "react-icons/ci";
 import { MdLightMode } from "react-icons/md";
 import { tootgleTheme } from "../../AppSlice";
 
@@ -13,7 +13,19 @@ export default function Appbar() {
   console.log(user)
 
   return (
-    <Navbar position="fixed" as="div" isBordered className="w-full justify-around">
+    <Navbar position="static" as="div" isBordered className="w-full flex justify-between">
+      <NavbarBrand>
+        <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
+          <path
+            clipRule="evenodd"
+            d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
+            fill="currentColor"
+            fillRule="evenodd"
+          />
+        </svg>
+
+        <p className="font-bold text-inherit">ACME</p>
+      </NavbarBrand>
       <NavbarContent as="div" className="items-center gap-5" justify="end">
         {/* <NavbarItem>
           <Link to="/">
@@ -36,12 +48,12 @@ export default function Appbar() {
           </Link>
         </NavbarItem> */}
         <NavbarItem>
-        <Button isIconOnly variant="light" radius="full" color="primary" aria-label="Theme mode" onClick={()=>dispatch(tootgleTheme())}>
-        
-        {
-          darkTheme?<CiLight size={25}/>:<CiDark size={25}/>
-        }
-      </Button>   
+          <Button isIconOnly variant="light" radius="full" color="primary" aria-label="Theme mode" onClick={() => dispatch(tootgleTheme())}>
+
+            {
+              darkTheme ? <CiLight size={25} /> : <CiDark size={25} />
+            }
+          </Button>
         </NavbarItem>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>

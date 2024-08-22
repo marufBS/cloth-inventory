@@ -13,7 +13,7 @@ const SidebarExpand = () => {
     }
     return (
         <div className="min-w-[300px]  border-r-1 border-default-200">
-            <div className="h-[64px] flex justify-center items-center">
+            {/* <div className="h-[64px] flex justify-center items-center">
                 <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
                     <path
                         clipRule="evenodd"
@@ -23,8 +23,8 @@ const SidebarExpand = () => {
                     />
                 </svg>
                 <p className="hidden sm:block font-bold text-inherit">ClothCart</p>
-            </div>
-            <Divider />
+            </div> */}
+            {/* <Divider /> */}
             <Listbox selectionMode='single' hideSelectedIcon classNames={{list:"gap-2 h-[180px] text-2xl"}}>
                 <ListboxItem startContent={<BsBoxes />} classNames={{title:"text-xl"}}  key="products" onClick={() => handleRoute("/products")}>
                     Products
