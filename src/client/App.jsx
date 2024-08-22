@@ -59,9 +59,58 @@ function App() {
           }
         </div>
       </main>
+      
     </>
   );
 }
 
 export default App;
 
+// import React, { useState } from 'react';
+// import { Button,Spacer } from '@nextui-org/react';
+// import { FaHome, FaUser, FaCog } from 'react-icons/fa'; // Import icons from react-icons
+
+// const Sidebar = () => {
+//   const [isMinified, setIsMinified] = useState(false);
+
+//   const toggleSidebar = () => {
+//     setIsMinified(!isMinified);
+//   };
+
+//   return (
+//     <div style={{ display: 'flex' }} className='bg-background text-foreground'>
+//       <div
+//         style={{
+//           width: isMinified ? '60px' : '200px',
+//           transition: 'width 0.3s',
+//           backgroundColor: '#1F1F1F',
+//           height: '100vh',
+//           padding: '10px',
+//         }}
+//       >
+//         <Button auto onClick={toggleSidebar} style={{ marginBottom: '20px' }}>
+//           {isMinified ? '>' : '<'}
+//         </Button>
+//         <Spacer y={1} />
+//         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+//           <FaHome size={24} style={{ marginRight: isMinified ? '0' : '10px' }} />
+//           {!isMinified && <p color="white">Home</p>}
+//         </div>
+//         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+//           <FaUser size={24} style={{ marginRight: isMinified ? '0' : '10px' }} />
+//           {!isMinified && <p color="white">Profile</p>}
+//         </div>
+//         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+//           <FaCog size={24} style={{ marginRight: isMinified ? '0' : '10px' }} />
+//           {!isMinified && <p color="white">Settings</p>}
+//         </div>
+//       </div>
+//       <div style={{ flex: 1, padding: '20px' }}>
+//         {/* <Text h2>Main Content Area</Text> */}
+//         sdfdsfsdf
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Sidebar;
