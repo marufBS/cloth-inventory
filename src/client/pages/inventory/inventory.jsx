@@ -24,7 +24,7 @@ const Inventory = () => {
     axios.get("http://localhost:3000/api/orders")
       .then((res) => {
         setOrders([...res.data])
-        console.log(orders)
+        // console.log(orders)
       })
   }, [update])
 
@@ -32,8 +32,9 @@ const Inventory = () => {
     dispatch(setInventoryActionType("add"))
   }
 
-
-  console.log(selectedKeys)
+  const handleCustomerEdit = ()=>{
+    dispatch(setInventoryActionType("edit"))
+  }
   return (
     <div className="max-w-5xl mx-auto mt-5 w-full">
       <div className="flex flex-col p-2">
@@ -99,7 +100,7 @@ const Inventory = () => {
                         <div className="relative flex items-center gap-4">
                           <Tooltip content="Edit">
                             <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                              <Button isIconOnly aria-label="edit" variant="light" onClick={() => handleEditCustomer(item._id)}>
+                              <Button isIconOnly aria-label="edit" variant="light" onClick={() => handleCustomerEdit(item._id)}>
                                 <MdOutlineEdit size={20} />
                               </Button>
                             </span>

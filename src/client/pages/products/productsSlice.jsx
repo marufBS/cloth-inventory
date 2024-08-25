@@ -6,7 +6,7 @@ const productSlice = createSlice({
         productName:"",
         productPrice:0,
         productURL:"",
-        productQuantity:0,
+        productStock:0,
         product_Id:"",
         listUpdate:false,
         productActionType:""
@@ -21,8 +21,8 @@ const productSlice = createSlice({
         setProductURL:((state,action)=>{
             state.productURL=action.payload
         }),
-        setProductQuantity:((state,action)=>{
-            state.productQuantity=action.payload
+        setProductStock:((state,action)=>{
+            state.productStock=action.payload
         }),
         setProduct_Id:((state,action)=>{
             state.product_Id=action.payload
@@ -36,5 +36,5 @@ const productSlice = createSlice({
     }
 })
 
-export const {setProductName,setProductPrice,setProductURL,setProductQuantity,setProduct_Id,setListUpdate,setProductActionType} = productSlice.actions
+export const {setProductName,setProductPrice,setProductURL,setProductStock,setProduct_Id,setListUpdate,setProductActionType} = productSlice.actions
 export default productSlice.reducer

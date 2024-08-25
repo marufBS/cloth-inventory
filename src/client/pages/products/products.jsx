@@ -1,43 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, CardBody, CardFooter, Image, Button, useDisclosure, Divider } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
+import { setListUpdate, setProduct_Id, setProductActionType, setProductName, setProductPrice, setProductStock, setProductURL } from "./productsSlice";
+import { Card, CardBody, CardFooter, Image, Button,Divider } from "@nextui-org/react";
 import { MdOutlineEdit, MdDeleteOutline } from "react-icons/md";
-import { setListUpdate, setProduct_Id, setProductActionType, setProductName, setProductPrice, setProductQuantity, setProductURL } from "./productsSlice";
-import ProductModal from "../../components/modals/productModal";
 import { BsBoxes } from "react-icons/bs";
 import { TbCurrencyTaka } from "react-icons/tb";
 
 export default function Products() {
-  const mainHeight = useSelector((state) => state.app.mainHeight)
   const update = useSelector((state) => state.product.listUpdate)
-  const productActionType = useSelector((state) => state.product.productActionType)
   const [products, setProducts] = useState([])
-  const [modalType, setModalType] = useState("add")
-
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const dispatch = useDispatch()
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/products')
       .then((res) => {
-        setProducts([...res.data.products])
+        setProducts([...res.data])
       })
 
   }, [update])
 
   const handleProductCreate = () => {
-    setModalType("add")
     dispatch(setProductActionType("add"))
     dispatch(setProductName(""))
     dispatch(setProductPrice(""))
     dispatch(setProductURL(""))
-    dispatch(setProductQuantity(""))
+    dispatch(setProductStock(""))
   }
 
   const handleEditProduct = (id) => {
-    // onOpen()
-    setModalType("edit")
     dispatch(setProductActionType("edit"))
 
     const response = products.filter((product) => product._id === id)
@@ -46,14 +37,13 @@ export default function Products() {
     dispatch(setProductName(matchedProduct.productName))
     dispatch(setProductPrice(matchedProduct.productPrice))
     dispatch(setProductURL(matchedProduct.productURL))
-    dispatch(setProductQuantity(matchedProduct.productQuantity))
+    dispatch(setProductStock(matchedProduct.productStock))
     dispatch(setProduct_Id(id))
 
   }
 
   const handleDeleteProduct = async (id) => {
     const deletedProduct = await axios.delete(`http://localhost:3000/api/products/${id}`)
-    console.log(deletedProduct)
     dispatch(setListUpdate())
   }
 
@@ -61,17 +51,48 @@ export default function Products() {
     <div className="max-w-[900px] mx-auto">
       <div className="flex justify-end my-5">
         <Button
-          // onPress={onOpen} 
+          // onPress={onOpen}
           onClick={handleProductCreate} className="mr-5">Add Product</Button>
       </div>
       <div className="flex flex-wrap justify-center gap-5 pb-4">
+        {/* <Card className="max-w-xs" shadow="sm" isPressable onPress={() => console.log("item pressed")}>
+          <CardBody className="overflow-visible p-0">
+            <Image
+              shadow="sm"
+              radius="lg"
+              // width="100%"
+              alt={"item.productName"}
+              className="w-[200px] object-cover h-[140px] rounded-b-none"
+              src={"item.productURL"}
+            />
+          </CardBody>
+          <CardFooter className="text-small flex flex-col gap-2">
+            <div className="w-full flex justify-start">
+              {"item.productName"}
+            </div>
+            <div className="flex flex-row w-full justify-evenly">
+              <div className="flex flex-row justify-center items-center gap-2">
+                <div className="flex items-center">
+                  <TbCurrencyTaka />"12"
+                </div>
+                <div className="flex items-center gap-1">
+                  <BsBoxes />{12}
+                </div>
+              </div>
+              <Divider orientation="vertical" className="mx-1" />
+              <div className="flex flex-row justify-between">
+                <Button isIconOnly variant="light" color="danger" ><MdDeleteOutline size={20} /></Button>
+                <Button isIconOnly variant="light" color="secondary" ><MdOutlineEdit size={20} /></Button>
+              </div>
+            </div>
+          </CardFooter>
+        </Card> */}
         {products.toReversed().map((item, index) => (
           <Card className="max-w-xs" shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")}>
             <CardBody className="overflow-visible p-0">
               <Image
                 shadow="sm"
                 radius="lg"
-                // width="100%"
                 alt={item.productName}
                 className="w-[200px] object-cover h-[140px] rounded-b-none"
                 src={item.productURL}
@@ -81,43 +102,25 @@ export default function Products() {
               <div className="w-full flex justify-start">
                 {item.productName}
               </div>
-              {/*
-               <div className="flex flex-col w-full">
-                <div className="flex flex-row justify-end">
-                  <div className="flex gap-5">
-                    <p className="text-default-500"><span className="text-xl">৳ </span>{item.productPrice}</p>
-                    <div className="flex items-center gap-1">
-                      <BsBoxes />{item.productQuantity}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-row justify-between w-full">
-                <Button isIconOnly variant="light" color="danger" onClick={() => handleDeleteProduct(item._id)}><MdDeleteOutline size={20} /></Button>
-                <Button isIconOnly variant="light" color="secondary" onClick={() => handleEditProduct(item._id)}><MdOutlineEdit size={20} /></Button>
-              </div> 
-              */}
               <div className="flex flex-row w-full justify-evenly">
                 <div className="flex flex-row justify-center items-center gap-2">
                   <div className="flex items-center">
                     <TbCurrencyTaka />{item.productPrice}
                   </div>
                   <div className="flex items-center gap-1">
-                    <BsBoxes />{item.productQuantity}
+                    <BsBoxes />{item.productStock}
                   </div>
                 </div>
                 <Divider orientation="vertical" className="mx-1" />
                 <div className="flex flex-row justify-between">
-                  <Button isIconOnly variant="light" color="danger" onClick={() => handleDeleteProduct(item._id)}><MdDeleteOutline size={20} /></Button>
-                  <Button isIconOnly variant="light" color="secondary" onClick={() => handleEditProduct(item._id)}><MdOutlineEdit size={20} /></Button>
+                  <Button isIconOnly variant="light" color="danger" aria-label="delete" onClick={() => handleDeleteProduct(item._id)}><MdDeleteOutline size={20} /></Button>
+                  <Button isIconOnly variant="light" color="secondary" aria-label="edit" onClick={() => handleEditProduct(item._id)}><MdOutlineEdit size={20} /></Button>
                 </div>
               </div>
             </CardFooter>
           </Card>
         ))}
       </div>
-
-      <ProductModal isOpen={isOpen} modalType={modalType} onOpenChange={onOpenChange} />
     </div>
   );
 }

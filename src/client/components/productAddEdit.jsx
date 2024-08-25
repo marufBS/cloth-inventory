@@ -1,7 +1,7 @@
 import { Card, Divider, Textarea, Input, Button } from '@nextui-org/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setListUpdate, setProductName, setProductPrice, setProductQuantity, setProductURL } from '../pages/products/productsSlice'
+import { setListUpdate, setProductName, setProductPrice, setProductStock, setProductURL } from '../pages/products/productsSlice'
 import axios from 'axios'
 
 const ProductAddEdit = () => {
@@ -10,13 +10,13 @@ const ProductAddEdit = () => {
   const productName = useSelector((state) => state.product.productName)
   const productPrice = useSelector((state) => state.product.productPrice)
   const productURL = useSelector((state) => state.product.productURL)
-  const productQuantity = useSelector((state) => state.product.productQuantity)
+  const productStock = useSelector((state) => state.product.productStock)
   const product_Id = useSelector((state) => state.product.product_Id)
   const productActionType = useSelector((state)=> state.product.productActionType)
 
   useEffect(()=>{
     dispatch(setProductPrice("")),
-    dispatch(setProductQuantity(""))
+    dispatch(setProductStock(""))
 
   },[])
 
@@ -26,7 +26,7 @@ const ProductAddEdit = () => {
       case "add":
         console.log("adding")
         axios.post("http://localhost:3000/api/products", {
-          productName, productPrice, productURL, productQuantity
+          productName, productPrice, productURL, productStock
         }).then((res) => {
           console.log(res)
           dispatch(setListUpdate())
@@ -34,7 +34,7 @@ const ProductAddEdit = () => {
         return;
       case "edit":
         console.log("updating")
-        const updateProduct = { productName, productPrice, productURL,productQuantity }
+        const updateProduct = { productName, productPrice, productURL,productStock }
         const response = await axios.put(`http://localhost:3000/api/products/${product_Id}`, updateProduct)
 
         console.log(response)
@@ -83,9 +83,9 @@ const ProductAddEdit = () => {
           variant="bordered"
           placeholder='Enter product quantity'
           className="max-w-xs text-default-900"
-          defaultValue={productQuantity}
-          value={productQuantity}
-          onChange={(e) => dispatch(setProductQuantity(e.target.value))}
+          defaultValue={productStock}
+          value={productStock}
+          onChange={(e) => dispatch(setProductStock(e.target.value))}
         />
         <Textarea
           aria-label="Product URL"
