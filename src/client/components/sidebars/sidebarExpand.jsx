@@ -21,8 +21,8 @@ const SidebarExpand = () => {
         dispatch(setInventoryActionType(""))
     }
     return (
-        <div className={`${isSidebarMinify?'w-[5%]':'w-[15%]'} border-r-1 border-default-200`}>
-            <Listbox selectionMode='single' hideSelectedIcon classNames={{ list: `gap-2 h-[180px] text-2xl justify-center`,emptyContent:"h-full" }}>
+        <div className={`${isSidebarMinify?'w-[4%]':'w-[15%]'} border-r-1 border-default-200`}>
+            <Listbox selectionMode='single' hideSelectedIcon classNames={{ list: `gap-2 h-[180px] text-2xl`}}>
                 <ListboxItem startContent={<BsBoxes />} classNames={{ title: "text-xl" }} key="products" onClick={() => handleRoute("/products")}>
                     {
                         !isSidebarMinify && "Products"

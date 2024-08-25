@@ -12,24 +12,26 @@ import SidebarExpand from "./components/sidebars/sidebarExpand";
 import CustomerAddEdit from "./components/customerAddEdit";
 import ProductAddEdit from "./components/productAddEdit";
 import OrderAddEdit from "./components/orderAddEdit";
+import { setMainWidth } from "./AppSlice";
+import { useEffect, useRef } from "react";
 function App() {
-  // const mainRef = useRef(null)
-  // const dispatch = useDispatch()
-  // const mainHeight = useSelector((state) => state.app.mainHeight)
+  const mainRef = useRef(null)
+  const dispatch = useDispatch()
+  const mainWidth = useSelector((state) => state.app.mainWidth)
   const darkTheme = useSelector((state) => state.app.darkTheme)
   const productActionType = useSelector((state) => state.product.productActionType)
-  const customerActionType = useSelector((state)=>state.customer.customerActionType)
-  const inventoryActionType = useSelector((state)=>state.inventory.inventoryActionType)
-  // useEffect(() => {
-  //   dispatch(setMainHeight(mainRef.current.offsetHeight))
-  // }, [])
-  // console.log(mainHeight)
+  const customerActionType = useSelector((state) => state.customer.customerActionType)
+  const inventoryActionType = useSelector((state) => state.inventory.inventoryActionType)
+  useEffect(() => {
+    dispatch(setMainWidth(mainRef.current?.offsetWidth))
+  }, [mainRef.current?.offsetWidth])
+  console.log(mainWidth)
 
   return (
     <>
       {/* <main ref={mainRef} className={`flex ${darkTheme ? 'dark' : 'light'} text-foreground bg-background mrf h-screen overflow-hidden`}>
     </main> */}
-      <main className={`${darkTheme ? 'dark' : 'light'} bg-background text-foreground flex flex-col h-screen overflow-hidden`}>
+      <main ref={mainRef} className={`${darkTheme ? 'dark' : 'light'} bg-background text-foreground flex flex-col h-screen overflow-hidden`}>
         <Appbar />
         <div className="flex flex-row flex-1 h-0">
           <SidebarExpand />
@@ -45,21 +47,24 @@ function App() {
             <Route path="/signin" element={<SignIn />} /> */}
             </Routes>
           </div>
-          {
-            productActionType &&
-            <ProductAddEdit/>
-          }
-          {
-            customerActionType&&
-            <CustomerAddEdit/>
-          }
-          {
-            inventoryActionType&&
-            <OrderAddEdit/>
-          }
+          
+          <div className="w-[20%]">
+            {
+              productActionType &&
+              <ProductAddEdit />
+            }
+            {
+              customerActionType &&
+              <CustomerAddEdit />
+            }
+            {
+              inventoryActionType &&
+              <OrderAddEdit />
+            }
+          </div>
         </div>
       </main>
-      
+
     </>
   );
 }

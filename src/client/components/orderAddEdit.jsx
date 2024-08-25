@@ -525,7 +525,7 @@ const OrderAddEdit = () => {
   }
 
   return (
-    <Card className='flex-1 min-w-[20%] max-w-[25%] rounded-none p-2'>
+    <Card className='flex-1 rounded-none p-2'>
       <div className='text-center text-xl'>
         {inventoryActionType === 'edit' ? 'Update Order' : 'New Order'}
       </div>

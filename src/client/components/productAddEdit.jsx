@@ -45,7 +45,7 @@ const ProductAddEdit = () => {
     }
   }
   return (
-    <Card className='flex-1 max-w-[20%] rounded-none p-2'>
+    <Card className='flex-1 rounded-none p-2'>
       <div className='text-center text-xl'>
         {productActionType==="edit"?'Update Product':'Add Product'}
       </div>

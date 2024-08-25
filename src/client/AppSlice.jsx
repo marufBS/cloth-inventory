@@ -3,12 +3,12 @@ import { createSlice } from '@reduxjs/toolkit'
 const appSlice = createSlice({
   name: 'app',
   initialState: {
-    mainHeight: 0,
+    mainWidth: 0,
     darkTheme: false,
   },
   reducers: {
-    setMainHeight: ((state, action) => {
-      state.mainHeight = action.payload
+    setMainWidth: ((state, action) => {
+      state.mainWidth = action.payload
     }),
     tootgleTheme: ((state) => {
       state.darkTheme = !state.darkTheme;
@@ -16,5 +16,5 @@ const appSlice = createSlice({
   }
 })
 
-export const { setMainHeight,tootgleTheme } = appSlice.actions
+export const { setMainWidth,tootgleTheme } = appSlice.actions
 export default appSlice.reducer;

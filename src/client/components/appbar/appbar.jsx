@@ -32,7 +32,7 @@ export default function Appbar() {
         </div>
         <Button isIconOnly variant="light" onClick={()=>dispatch(setMinify())}>
 
-        <CiMenuFries />
+        <CiMenuFries size={20} />
         </Button>
       </NavbarBrand>
       <NavbarContent as="div" className="items-center gap-5" justify="end">
