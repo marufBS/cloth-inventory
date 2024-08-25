@@ -2,9 +2,9 @@ import { Card, Divider, Textarea, Input, Button } from '@nextui-org/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { setCustomerAddress, setCustomerId, setCustomerName, setListUpdate } from '../pages/customer/customerSlice'
+import { setCustomerAddress, setCustomerId, setCustomerName, setListUpdate } from '../customers/customerSlice'
 
-const CustomerAddEdit = () => {
+const CustomerProperties = () => {
     const dispatch = useDispatch()
     const customerActionType = useSelector((state) => state.customer.customerActionType)
     const customerName = useSelector((state) => state.customer.customerName)
@@ -90,4 +90,4 @@ const CustomerAddEdit = () => {
     )
 }
 
-export default CustomerAddEdit
+export default CustomerProperties

@@ -6,7 +6,7 @@ import { CiDark, CiLight } from "react-icons/ci";
 import { MdLightMode } from "react-icons/md";
 import { tootgleTheme } from "../../AppSlice";
 import { CiMenuFries } from "react-icons/ci";
-import { setMinify } from "../sidebars/sidebarExpandSlice";
+import { setMinify } from "../sidebar/sidebarSlice";
 
 export default function Appbar() {
   const user = useSelector((state) => state.user.userData)
@@ -15,9 +15,9 @@ export default function Appbar() {
   // console.log(user)
 
   return (
-    <Navbar classNames={{ wrapper: 'max-w-full px-2' }} position="static" as="div" isBordered>
+    <Navbar classNames={{ wrapper: 'max-w-full px-5' }} position="static" as="div" isBordered>
 
-      <NavbarBrand className="gap-5">
+      <NavbarBrand className="gap-10">
         <div className="flex items-center">
           <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
             <path

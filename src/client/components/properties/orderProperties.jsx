@@ -401,7 +401,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { FaRegTrashCan, FaMinus, FaPlus } from 'react-icons/fa6';
 
-const OrderAddEdit = () => {
+const OrderProperties = () => {
   const [products, setProducts] = useState([]);
   const [customers,setCustomers] = useState([])
   const [paidAmount,setPaidAmount] = useState(0)
@@ -412,8 +412,8 @@ const OrderAddEdit = () => {
     totalPrice: 0,
   });
   const dispatch = useDispatch();
-  const inventoryActionType = useSelector(
-    (state) => state.inventory.inventoryActionType
+  const orderActionType = useSelector(
+    (state) => state.order.orderActionType
   );
 
   useEffect(() => {
@@ -527,7 +527,7 @@ const OrderAddEdit = () => {
   return (
     <Card className='flex-1 rounded-none p-2'>
       <div className='text-center text-xl'>
-        {inventoryActionType === 'edit' ? 'Update Order' : 'New Order'}
+        {orderActionType === 'edit' ? 'Update Order' : 'New Order'}
       </div>
       <Divider className='my-2' />
       <div className='flex flex-col gap-5'>
@@ -613,5 +613,5 @@ const OrderAddEdit = () => {
   );
 };
 
-export default OrderAddEdit;
+export default OrderProperties;
 

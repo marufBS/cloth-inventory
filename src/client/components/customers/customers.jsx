@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, Input, TableCell, User, Chip, Tooltip, getKeyValue, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Textarea } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User,  Tooltip,  Button} from "@nextui-org/react";
 import { MdOutlineEdit, MdDeleteOutline } from "react-icons/md";
-import CustomerModal from "../../components/modals/customarModal";
 import { useDispatch, useSelector } from "react-redux";
 import { setCustomer_Id, setCustomerActionType, setCustomerAddress, setCustomerId, setCustomerName, setListUpdate } from "./customerSlice";
 
 
-export default function Customer() {
+export default function Customers() {
 
   const update = useSelector((state) => state.customer.listUpdate)
   const [users, setUsers] = useState([])
-  const [modalType, setModalType] = useState("add")
-
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -24,7 +20,6 @@ export default function Customer() {
   }, [update])
 
   const handleCustomerCreate = () => {
-    setModalType("add")
     dispatch(setCustomerActionType("add"))
     dispatch(setCustomerName(""))
     dispatch(setCustomerId(""))
@@ -32,8 +27,6 @@ export default function Customer() {
   }
 
   const handleEditCustomer = async (id) => {
-    // onOpen()
-    setModalType("edit")
     dispatch(setCustomerActionType("edit"))
 
     const response = users.filter((user) => user._id === id)
@@ -57,9 +50,9 @@ export default function Customer() {
       <div className="flex justify-end my-5">
         <Button
           //  onPress={onOpen}
-          aria-label="Create Customer" onClick={handleCustomerCreate}>Create Customer</Button>
+          aria-label="Create s" onClick={handleCustomerCreate}>Create customer</Button>
       </div>
-      <Table selectionMode="single" aria-label="Customer Table">
+      <Table selectionMode="single" aria-label="s Table">
         <TableHeader>
           <TableColumn>NAME</TableColumn>
           <TableColumn>ADDRESS</TableColumn>
@@ -102,9 +95,6 @@ export default function Customer() {
           }
         </TableBody>
       </Table>
-
-
-      <CustomerModal isOpen={isOpen} modalType={modalType} onOpenChange={onOpenChange} />
     </div>
   );
 }

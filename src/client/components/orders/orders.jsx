@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, Input, TableCell, User, Chip, Tooltip, getKeyValue, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Textarea } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow,  TableCell, Tooltip, Button } from "@nextui-org/react";
 import { MdOutlineEdit, MdDeleteOutline } from "react-icons/md";
-// import CustomerModal from "../../components/modals/customarModal";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { setInventoryActionType } from "./inventorySlice";
-// import { setCustomerId, setCustomer_Id, setCustomerAddress, setCustomerName, setListUpdate } from "../customer/customerSlice";
-// import { setCustomer_Id, setCustomerAddress, setCustomerId, setCustomerName, setListUpdate } from "./customerSlice";
+import { setOrderActionType } from "./orderSlice";
 
 
-const Inventory = () => {
+const Orders = () => {
   const update = useSelector((state) => state.customer.listUpdate)
   const [orders, setOrders] = useState([])
-  const [modalType, setModalType] = useState("add")
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
-
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/orders")
@@ -29,11 +21,11 @@ const Inventory = () => {
   }, [update])
 
   const handleCustomerCreate = () => {
-    dispatch(setInventoryActionType("add"))
+    dispatch(setOrderActionType("add"))
   }
 
   const handleCustomerEdit = ()=>{
-    dispatch(setInventoryActionType("edit"))
+    dispatch(setOrderActionType("edit"))
   }
   return (
     <div className="max-w-5xl mx-auto mt-5 w-full">
@@ -132,5 +124,5 @@ const Inventory = () => {
   )
 }
 
-export default Inventory
+export default Orders
 

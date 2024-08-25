@@ -1,10 +1,10 @@
 import { Card, Divider, Textarea, Input, Button } from '@nextui-org/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setListUpdate, setProductName, setProductPrice, setProductStock, setProductURL } from '../pages/products/productsSlice'
+import { setListUpdate, setProductName, setProductPrice, setProductStock, setProductURL } from '../products/productsSlice'
 import axios from 'axios'
 
-const ProductAddEdit = () => {
+const ProductProperties = () => {
   const dispatch = useDispatch()
 
   const productName = useSelector((state) => state.product.productName)
@@ -105,4 +105,4 @@ const ProductAddEdit = () => {
   )
 }
 
-export default ProductAddEdit
+export default ProductProperties

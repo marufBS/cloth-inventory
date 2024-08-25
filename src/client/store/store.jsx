@@ -1,20 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AppReducer from "../AppSlice";
-import UserReducer from "../pages/customer/userSlice";
-import ProductsReducer from "../pages/products/productsSlice";
-import CustomerReducer from "../pages/customer/customerSlice";
-import InventoryReducer from "../pages/inventory/inventorySlice"
-import sidebarExpandReducer from "../components/sidebars/sidebarExpandSlice";
+import UserReducer from "../components/customers/userSlice";
+import CustomerReducer from "../components/customers/customerSlice";
+import ProductReducer from "../components/products/productsSlice";
+import OrderReducer from "../components/orders/orderSlice"
+import sidebarReducer from "../components/sidebar/sidebarSlice";
 
 
 const store = configureStore({
     reducer: {
         app: AppReducer,
         user: UserReducer,
-        product:ProductsReducer,
+        product:ProductReducer,
         customer:CustomerReducer,
-        inventory:InventoryReducer,
-        sidebarExpand:sidebarExpandReducer
+        order:OrderReducer,
+        sidebar:sidebarReducer
     }
 })
 
