@@ -16,7 +16,7 @@ const Orders = () => {
     axios.get("http://localhost:3000/api/orders")
       .then((res) => {
         setOrders([...res.data])
-        // console.log(orders)
+        console.log(orders)
       })
   }, [update])
 
@@ -48,7 +48,6 @@ const Orders = () => {
             <TableColumn>Date</TableColumn>
             <TableColumn align="center">Bill No</TableColumn>
             <TableColumn align="center">Customer ID</TableColumn>
-            <TableColumn align="center">Total Discount</TableColumn>
             <TableColumn align="center">Due Amount</TableColumn>
             <TableColumn align="center">Paid Amount</TableColumn>
             <TableColumn align="center">Action</TableColumn>
@@ -59,7 +58,7 @@ const Orders = () => {
                 let totalDiscount = 0
                 let dueAmount = 0
                 let totalAmount = 0
-                item.products.map((i) => {
+                item.productList.map((i) => {
                   totalDiscount += i.productDiscount
                   totalAmount += i.productPrice
                 })
@@ -79,10 +78,7 @@ const Orders = () => {
                       <div>{item.customerId}</div>
                     </TableCell>
                     <TableCell>
-                      {totalDiscount}
-                    </TableCell>
-                    <TableCell>
-                      {dueAmount}
+                      {item.dueAmount}
                     </TableCell>
                     <TableCell>
                       <div>{item.paidAmount}</div>

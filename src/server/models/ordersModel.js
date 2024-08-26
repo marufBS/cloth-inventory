@@ -4,7 +4,6 @@ const orderSchema = new mongoose.Schema({
 
     billNo: {
         type: String,
-        required: true
     },
     billDate: {
         type: Date,
@@ -13,15 +12,24 @@ const orderSchema = new mongoose.Schema({
     customerId: {
         type: String,
         required: true,
-        unique:true
+    },
+    customerName:{
+        type:String,
+        required:true,
     },
     paidAmount: {
         type: Number,
         required: true
     },
-    products: [
+    dueAmount:{
+        type:Number,
+    },
+    totalBill:{
+        type:Number,
+    },
+    productList: [
         {
-            productId: {
+            _id: {
                 type: String,
                 required: true
             },
@@ -37,8 +45,9 @@ const orderSchema = new mongoose.Schema({
                 type: Number,
                 required: true
             },
-            productDiscount: {
-                type: Number
+            productURL:{
+                type:String,
+                required:true
             }
         }
     ]
