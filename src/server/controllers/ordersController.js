@@ -1,17 +1,19 @@
 import OrderModel from "../models/ordersModel.js"
+import ProductModel from "../models/productsModel.js"
 
 export const saveOrder = async (req, res) => {
-    try {
-        const {cart} = req.body
-        console.log(cart)
-        const newOrder = new OrderModel(cart)
+    
+        const cart = req.body.cart
+        const newOrder = new OrderModel(cart);
         const savedOrder = await newOrder.save()
-        
-        res.status(200).send(savedOrder)
 
-    } catch (error) {
-        res.status(500).send({ error })
-    }
+        await cart.productList.map(async (item) => {
+            console.log('item')
+            const snapshot = await ProductModel.findOneAndUpdate({ _id: item._id }, { $inc: { productStock: -item.productQuantity } })
+        })
+
+
+        res.status(200).send(savedOrder);
 }
 
 export const getOrders = async (req, res) => {
