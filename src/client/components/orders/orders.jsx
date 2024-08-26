@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Table, TableHeader, TableColumn, TableBody, TableRow,  TableCell, Tooltip, Button } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Tooltip, Button, Accordion, AccordionItem } from "@nextui-org/react";
 import { MdOutlineEdit, MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderActionType } from "./orderSlice";
@@ -24,7 +24,7 @@ const Orders = () => {
     dispatch(setOrderActionType("add"))
   }
 
-  const handleCustomerEdit = ()=>{
+  const handleCustomerEdit = () => {
     dispatch(setOrderActionType("edit"))
   }
   return (
