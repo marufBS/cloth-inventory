@@ -2,13 +2,13 @@ import { Card, Divider, Textarea, Input, Button } from '@nextui-org/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { setCustomerAddress, setCustomerId, setCustomerName, setListUpdate } from '../customers/customerSlice'
+import { setCustomerAddress, setCustomerPhone, setCustomerName, setListUpdate, setCustomer_Id } from '../customers/customerSlice'
 
 const CustomerProperties = () => {
     const dispatch = useDispatch()
     const customerActionType = useSelector((state) => state.customer.customerActionType)
     const customerName = useSelector((state) => state.customer.customerName)
-    const customerId = useSelector((state) => state.customer.customerId)
+    const customerPhone = useSelector((state) => state.customer.customerPhone)
     const customerAddress = useSelector((state) => state.customer.customerAddress)
     const customer_Id = useSelector((state) => state.customer.customer_Id)
 
@@ -24,14 +24,18 @@ const CustomerProperties = () => {
             case "add":
                 console.log("testing")
                 axios.post("http://localhost:3000/api/customers", {
-                    customerName, customerId, customerAddress
+                    customerName, customerPhone, customerAddress
                 }).then((res) => {
                     console.log(res)
+                    dispatch(setCustomerName(""))
+                    dispatch(setCustomerPhone(""))
+                    dispatch(setCustomerAddress(""))
+                    dispatch(setCustomer_Id(""))
                     dispatch(setListUpdate())
                 })
                 return;
             case "edit":
-                const updateCustomer = { customerName, customerId, customerAddress }
+                const updateCustomer = { customerName, customerPhone, customerAddress }
                 const response = await axios.put(`http://localhost:3000/api/customers/${customer_Id}`, updateCustomer)
 
                 console.log(response)
@@ -61,16 +65,16 @@ const CustomerProperties = () => {
                     onChange={(e) => dispatch(setCustomerName(e.target.value))}
                 />
                 <Input
-                    aria-level="Customer-ID"
+                    aria-level="Customer Phone"
                     isRequired
                     type="text"
-                    label="Customer ID"
+                    label="Customer Phone Number"
                     variant="bordered"
-                    placeholder='Enter your username'
+                    placeholder="Enter customer's phone number"
                     className="max-w-xs text-default-foreground"
-                    defaultValue={customerId}
-                    value={customerId}
-                    onChange={(e) => dispatch(setCustomerId(e.target.value))}
+                    defaultValue={customerPhone}
+                    value={customerPhone}
+                    onChange={(e) => dispatch(setCustomerPhone(e.target.value))}
                 />
                 <Textarea
                     aria-label="Customer-Address"

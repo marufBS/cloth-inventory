@@ -12,19 +12,21 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { FaRegTrashCan, FaMinus, FaPlus } from 'react-icons/fa6';
+import moment from 'moment'
+import { setListUpdate } from '../orders/orderSlice';
 
 const OrderProperties = () => {
   const [products, setProducts] = useState([]);
-  const [customers,setCustomers] = useState([])
-  const [paidAmount,setPaidAmount] = useState(0)
-  const [dueAmount,setDueAmount] = useState(0)
+  const [customers, setCustomers] = useState([])
+  const [paidAmount, setPaidAmount] = useState("")
+  const [dueAmount, setDueAmount] = useState(0)
   const [cart, setCart] = useState({
-    billNo:'',
-    billDate:new Date(),
-    customerId:'',
+    billNo: '',
+    billDate: '',
+    customerPhone: '',
     customerName: '',
-    paidAmount:0,
-    dueAmount:0,
+    paidAmount: 0,
+    dueAmount: 0,
     totalBill: 0,
     productList: [],
   });
@@ -34,11 +36,14 @@ const OrderProperties = () => {
   );
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products').then((res) => {
-      setProducts(res.data);
-    });
+    axios.get('http://localhost:3000/api/products')
+      .then((res) => {
+        if (res.data) {
+          setProducts(res.data.filter((item) => item.productStock >= 0))
+        }
+      });
 
-    axios.get('http://localhost:3000/api/customers').then((res)=>{
+    axios.get('http://localhost:3000/api/customers').then((res) => {
       setCustomers(res.data)
     })
   }, []);
@@ -68,11 +73,13 @@ const OrderProperties = () => {
     setProducts(products.filter((item) => item._id !== id));
   };
 
-  const onSelectionChangeCustomers = (id) =>{
-    const selectedCustomer = customers.find((item)=>item._id===id)
+  const onSelectionChangeCustomers = (id) => {
+    const selectedCustomer = customers.find((item) => item._id === id)
     selectedCustomer.productId = selectedCustomer._id
     cart.customerId = selectedCustomer._id
     cart.customerName = selectedCustomer.customerName
+    cart.customerPhone = selectedCustomer.customerPhone
+    console.log(cart)
   }
 
   const handleDecreaseProduct = (id) => {
@@ -139,25 +146,39 @@ const OrderProperties = () => {
     });
   };
 
-  const handlePaidAmount = (amount)=>{
-    setPaidAmount(amount)
-    setDueAmount(cart.totalBill-amount)
-    cart.dueAmount = cart.totalBill-amount
-    cart.paidAmount = amount
+  const handlePaidAmount = () => {
+    // setDueAmount(cart.totalBill - paidAmount)
+    cart.dueAmount = paidAmount ? cart.totalBill - paidAmount : cart.totalBill
+    cart.paidAmount = !paidAmount && 0
     console.log(cart)
 
   }
 
-  const handlePlaceOrder = ()=>{
-    
-    cart.productList.map((item)=>delete item.productStock)
+  const handlePlaceOrder = () => {
+    handlePaidAmount()
+
+    cart.productList.map((item) => delete item.productStock)
     console.log(cart)
-    axios.post('http://localhost:3000/api/orders',{
-      cart:cart
+    cart.billDate = moment().format('DD/MM/YY hh:mm:ss A')
+    axios.post('http://localhost:3000/api/orders', {
+      cart: cart
     })
-    .then((res)=>{
-      console.log(res)
-    })
+      .then((res) => {
+        console.log(res)
+        setCart({
+          billNo: '',
+          billDate: '',
+          customerPhone: '',
+          customerName: '',
+          paidAmount: '',
+          dueAmount: '',
+          totalBill: '',
+          productList: [],
+        });
+        setPaidAmount("")
+        dispatch(setListUpdate())
+        console.log(products)
+      })
   }
 
   return (
@@ -240,7 +261,7 @@ const OrderProperties = () => {
           className="max-w-xs text-default-900"
           defaultValue={paidAmount}
           value={paidAmount}
-          onChange={(e)=>handlePaidAmount(e.target.value)}
+          onChange={(e) => setPaidAmount(e.target.value)}
         />
         <div>Total = {cart.totalBill}</div>
         <div>Due = {dueAmount}</div>

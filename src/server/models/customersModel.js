@@ -6,7 +6,7 @@ const customerSchema = new mongoose.Schema({
       type:String,
       required:true,
     },
-    customerId:{
+    customerPhone:{
       type:String,
       required:true,
       // unique:true

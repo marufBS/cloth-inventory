@@ -2,11 +2,11 @@ import mongoose from "mongoose"
 
 const orderSchema = new mongoose.Schema({
 
-    billNo: {
+    customerPhone: {
         type: String,
     },
     billDate: {
-        type: Date,
+        type: String,
         required: true
     },
     customerId: {
@@ -19,7 +19,6 @@ const orderSchema = new mongoose.Schema({
     },
     paidAmount: {
         type: Number,
-        required: true
     },
     dueAmount:{
         type:Number,

@@ -36,8 +36,8 @@ export default function Products() {
 
     dispatch(setProductName(matchedProduct.productName))
     dispatch(setProductPrice(matchedProduct.productPrice))
-    dispatch(setProductURL(matchedProduct.productURL))
     dispatch(setProductStock(matchedProduct.productStock))
+    dispatch(setProductURL(matchedProduct.productURL))
     dispatch(setProduct_Id(id))
 
   }
@@ -55,38 +55,6 @@ export default function Products() {
           onClick={handleProductCreate} className="mr-5">Add Product</Button>
       </div>
       <div className="flex flex-wrap justify-center gap-5 pb-4">
-        {/* <Card className="max-w-xs" shadow="sm" isPressable onPress={() => console.log("item pressed")}>
-          <CardBody className="overflow-visible p-0">
-            <Image
-              shadow="sm"
-              radius="lg"
-              // width="100%"
-              alt={"item.productName"}
-              className="w-[200px] object-cover h-[140px] rounded-b-none"
-              src={"item.productURL"}
-            />
-          </CardBody>
-          <CardFooter className="text-small flex flex-col gap-2">
-            <div className="w-full flex justify-start">
-              {"item.productName"}
-            </div>
-            <div className="flex flex-row w-full justify-evenly">
-              <div className="flex flex-row justify-center items-center gap-2">
-                <div className="flex items-center">
-                  <TbCurrencyTaka />"12"
-                </div>
-                <div className="flex items-center gap-1">
-                  <BsBoxes />{12}
-                </div>
-              </div>
-              <Divider orientation="vertical" className="mx-1" />
-              <div className="flex flex-row justify-between">
-                <Button isIconOnly variant="light" color="danger" ><MdDeleteOutline size={20} /></Button>
-                <Button isIconOnly variant="light" color="secondary" ><MdOutlineEdit size={20} /></Button>
-              </div>
-            </div>
-          </CardFooter>
-        </Card> */}
         {products.toReversed().map((item, index) => (
           <Card className="max-w-xs" shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")}>
             <CardBody className="overflow-visible p-0">

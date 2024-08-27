@@ -12,9 +12,9 @@ function generateRandomString(length) {
 }
 export const saveCustomer = async (req, res) => {
     try {
-        const { customerName, customerId, customerAddress } = req.body;
+        const { customerName, customerPhone, customerAddress } = req.body;
         const customerAvatar = `https://i.pravatar.cc/150?u=${generateRandomString(15)}`
-        const newUser = new CustomerMolel({ customerName, customerId, customerAddress, customerAvatar })
+        const newUser = new CustomerMolel({ customerName, customerPhone, customerAddress, customerAvatar })
         const savedUser = await newUser.save()
         res.status(200).send({ savedUser })
 

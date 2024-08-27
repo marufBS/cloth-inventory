@@ -3,7 +3,7 @@ import axios from "axios";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User,  Tooltip,  Button} from "@nextui-org/react";
 import { MdOutlineEdit, MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { setCustomer_Id, setCustomerActionType, setCustomerAddress, setCustomerId, setCustomerName, setListUpdate } from "./customerSlice";
+import { setCustomer_Id, setCustomerActionType, setCustomerAddress, setCustomerName, setCustomerPhone, setListUpdate } from "./customerSlice";
 
 
 export default function Customers() {
@@ -22,7 +22,7 @@ export default function Customers() {
   const handleCustomerCreate = () => {
     dispatch(setCustomerActionType("add"))
     dispatch(setCustomerName(""))
-    dispatch(setCustomerId(""))
+    dispatch(setCustomerPhone(""))
     dispatch(setCustomerAddress(""))
   }
 
@@ -33,7 +33,7 @@ export default function Customers() {
     const matchedUser = response[0]
 
     dispatch(setCustomerName(matchedUser.customerName))
-    dispatch(setCustomerId(matchedUser.customerId))
+    dispatch(setCustomerPhone(matchedUser.customerPhone))
     dispatch(setCustomerAddress(matchedUser.customerAddress))
     dispatch(setCustomer_Id(id))
   }
@@ -65,7 +65,7 @@ export default function Customers() {
                 <TableCell>
                   <User
                     avatarProps={{ radius: "lg", src: item.customerAvatar }}
-                    description={item.customerId}
+                    description={item.customerPhone}
                     name={item.customerName}
                   />
                 </TableCell>

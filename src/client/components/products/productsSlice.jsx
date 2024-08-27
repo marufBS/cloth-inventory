@@ -4,9 +4,9 @@ const productSlice = createSlice({
     name:"product",
     initialState:{
         productName:"",
-        productPrice:0,
+        productPrice:'',
         productURL:"",
-        productStock:0,
+        productStock:'',
         product_Id:"",
         listUpdate:false,
         productActionType:""

@@ -7,7 +7,7 @@ import { setOrderActionType } from "./orderSlice";
 
 
 const Orders = () => {
-  const update = useSelector((state) => state.customer.listUpdate)
+  const update = useSelector((state) => state.order.listUpdate)
   const [orders, setOrders] = useState([])
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
   const dispatch = useDispatch()
@@ -28,7 +28,7 @@ const Orders = () => {
     dispatch(setOrderActionType("edit"))
   }
   return (
-    <div className="max-w-5xl mx-auto mt-5 w-full">
+    <div className="mx-auto mt-5 w-full">
       <div className="flex flex-col p-2">
         <div className="flex justify-end my-5">
           <Button
@@ -36,17 +36,19 @@ const Orders = () => {
             aria-label="Create Customer" onClick={handleCustomerCreate}>Create Order</Button>
         </div>
         <Table
+          isHeaderSticky
           selectedKeys={selectedKeys}
           onSelectionChange={setSelectedKeys}
+          
           selectionMode="single"
           aria-label="Customer Table"
           selectionBehavior="replace"
-          classNames={{ wrapper: "overflow-auto" }}
+          classNames={{ wrapper: "overflow-auto", base: 'h-[600px] overflow-scroll' }}
         >
           <TableHeader>
             <TableColumn>Order ID</TableColumn>
-            <TableColumn>Date</TableColumn>
-            <TableColumn align="center">Bill No</TableColumn>
+            <TableColumn align="center">Date</TableColumn>
+            <TableColumn align="center">Phone Number</TableColumn>
             <TableColumn align="center">Customer ID</TableColumn>
             <TableColumn align="center">Due Amount</TableColumn>
             <TableColumn align="center">Paid Amount</TableColumn>
@@ -54,7 +56,7 @@ const Orders = () => {
           </TableHeader>
           <TableBody>
             {
-              orders.map((item) => {
+              orders.toReversed().map((item) => {
                 let totalDiscount = 0
                 let dueAmount = 0
                 let totalAmount = 0
@@ -72,7 +74,7 @@ const Orders = () => {
                       <div>{item.billDate}</div>
                     </TableCell>
                     <TableCell>
-                      <div>{item.billNo}</div>
+                      <div>{item.customerPhone}</div>
                     </TableCell>
                     <TableCell>
                       <div>{item.customerId}</div>
