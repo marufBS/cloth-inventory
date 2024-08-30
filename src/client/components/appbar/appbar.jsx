@@ -28,7 +28,7 @@ export default function Appbar() {
             />
           </svg>
 
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">ClothPOS</p>
         </div>
         <Button isIconOnly variant="light" onClick={()=>dispatch(setMinify())}>
 
