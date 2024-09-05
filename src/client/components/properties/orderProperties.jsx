@@ -36,14 +36,14 @@ const OrderProperties = () => {
   );
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products')
+    axios.get('/api/products')
       .then((res) => {
         if (res.data) {
           setProducts(res.data.filter((item) => item.productStock >= 0))
         }
       });
 
-    axios.get('http://localhost:3000/api/customers').then((res) => {
+    axios.get('/api/customers').then((res) => {
       setCustomers(res.data)
     })
   }, []);
@@ -160,7 +160,7 @@ const OrderProperties = () => {
     cart.productList.map((item) => delete item.productStock)
     console.log(cart)
     cart.billDate = moment().format('DD/MM/YY hh:mm:ss A')
-    axios.post('http://localhost:3000/api/orders', {
+    axios.post('/api/orders', {
       cart: cart
     })
       .then((res) => {

@@ -23,7 +23,7 @@ const ProductProperties = () => {
     switch (productActionType) {
       case "add":
         console.log("adding")
-        axios.post("http://localhost:3000/api/products", {
+        axios.post("/api/products", {
           productName, productPrice, productURL, productStock
         }).then((res) => {
           console.log(res)
@@ -33,7 +33,7 @@ const ProductProperties = () => {
       case "edit":
         console.log("updating")
         const updateProduct = { productName, productPrice, productURL,productStock }
-        const response = await axios.put(`http://localhost:3000/api/products/${product_Id}`, updateProduct)
+        const response = await axios.put(`/api/products/${product_Id}`, updateProduct)
 
         console.log(response)
         dispatch(setListUpdate())

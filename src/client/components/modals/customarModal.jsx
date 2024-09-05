@@ -21,7 +21,7 @@ const CustomerModal = ({ isOpen, modalType, onOpenChange }) => {
     switch (modalType) {
       case "add":
         console.log("testing")
-        axios.post("http://localhost:3000/api/customers", {
+        axios.post("/api/customers", {
           customerName, customerId, customerAddress
         }).then((res) => {
           console.log(res)
@@ -30,7 +30,7 @@ const CustomerModal = ({ isOpen, modalType, onOpenChange }) => {
         return;
       case "edit":
         const updateCustomer = { customerName, customerId, customerAddress }
-        const response = await axios.put(`http://localhost:3000/api/customers/${customer_Id}`, updateCustomer)
+        const response = await axios.put(`/api/customers/${customer_Id}`, updateCustomer)
 
         console.log(response)
         dispatch(setListUpdate())
