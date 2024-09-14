@@ -12,7 +12,6 @@ export default function Appbar() {
   const user = useSelector((state) => state.user.userData)
   const darkTheme = useSelector((state) => state.app.darkTheme)
   const dispatch = useDispatch()
-  // console.log(user)
 
   return (
     <Navbar classNames={{ wrapper: 'max-w-full px-5' }} position="static" as="div" isBordered>
@@ -36,24 +35,7 @@ export default function Appbar() {
         </Button>
       </NavbarBrand>
       <NavbarContent as="div" className="items-center gap-5" justify="end">
-        {/* <NavbarItem>
-          d
-        </NavbarItem>
-        <NavbarItem>
-          <Link to="/inventory">
-            Inventory
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link to="/products">
-            Produtcs
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link to="/customer">
-            Customer
-          </Link>
-        </NavbarItem> */}
+        
         <NavbarItem>
           <Button isIconOnly variant="light" radius="full" color="primary" aria-label="Theme mode" onClick={() => dispatch(tootgleTheme())}>
 

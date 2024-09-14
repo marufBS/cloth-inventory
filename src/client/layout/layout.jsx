@@ -7,6 +7,7 @@ import Products from '../components/products/products';
 import Orders from '../components/orders/orders';
 import Customers from '../components/customers/customers';
 import { useSelector } from 'react-redux';
+import POS from '../components/pos/pos';
 
 const Layout = () => {
 
@@ -25,6 +26,7 @@ const Layout = () => {
                 <div className="flex-1 overflow-auto p-4">
                     <Routes>
                         <Route path="/" element={<Products />} />
+                        <Route path="/POS" element={<POS />} />
                         <Route path="/products" element={<Products />} />
                         <Route path="/customers" element={<Customers />} />
                         <Route path="/orders" element={<Orders />} />
