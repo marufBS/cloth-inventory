@@ -21,7 +21,7 @@ const SignIn = () => {
     const togglePasswordVisibility = () => setIsPasswordVisible(!isPasswordVisible);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/users")
+        axios.get("/users")
             .then((res) => {
                 setUsers([...res.data])
             })

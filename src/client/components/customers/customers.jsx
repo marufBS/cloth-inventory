@@ -13,7 +13,7 @@ export default function Customers() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/customers")
+    axios.get("/api/customers")
       .then((res) => {
         setUsers([...res.data])
       })
@@ -39,7 +39,7 @@ export default function Customers() {
   }
 
   const handleDeleteCustomer = async (id) => {
-    const res = await axios.delete(`http://localhost:3000/api/customers/${id}`)
+    const res = await axios.delete(`/api/customers/${id}`)
     console.log(res)
     dispatch(setListUpdate())
 

@@ -18,7 +18,7 @@ const CreateOrder = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/orders")
+    axios.get("/api/orders")
       .then((res) => {
         setOrders([...res.data])
         console.log(orders)
@@ -46,7 +46,7 @@ const CreateOrder = () => {
   // }
 
   // const handleDeleteCustomer = async (id) => {
-  //   const res = await axios.delete(`http://localhost:3000/api/customers/${id}`)
+  //   const res = await axios.delete(`/api/customers/${id}`)
   //   console.log(res)
   //   dispatch(setListUpdate())
 

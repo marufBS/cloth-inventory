@@ -18,7 +18,7 @@
 //   const handleProduct = async () => {
 //     switch (modalType) {
 //       case "add":
-//         axios.post("http://localhost:3000/api/products", {
+//         axios.post("/api/products", {
 //           productName, productPrice, productURL,productQuantity
 //         }).then((res) => {
 //           console.log(res)
@@ -27,7 +27,7 @@
 //         return;
 //       case "edit":
 //         const updateProduct = { productName, productPrice, productURL }
-//         const response = await axios.put(`http://localhost:3000/api/products/${product_Id}`, updateProduct)
+//         const response = await axios.put(`/api/products/${product_Id}`, updateProduct)
 
 //         console.log(response)
 //         dispatch(setListUpdate())

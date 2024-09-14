@@ -44,7 +44,7 @@ export default function Products() {
   }
 
   const handleDeleteProduct = async (id) => {
-    const deletedProduct = await axios.delete(`http://localhost:3000/api/products/${id}`)
+    const deletedProduct = await axios.delete(`/api/products/${id}`)
     dispatch(setListUpdate())
   }
 

@@ -13,7 +13,7 @@ const Orders = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/orders")
+    axios.get("/api/orders")
       .then((res) => {
         setOrders([...res.data])
         console.log(orders)
